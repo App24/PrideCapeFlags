@@ -35,17 +35,17 @@ public abstract class AbstractClientPlayerMixin extends Player implements Client
         if(capeFlag.isUseElytra()){
             elytraResourceLocation = Identifier.tryParse(capeFlag.getElytraResourceLocation());
             if(elytraResourceLocation == null) return;
-            if(prideCapeFlags$checkTexture(elytraResourceLocation)){
+            if(prideCapeFlags$invalidTexture(elytraResourceLocation)){
                 elytraResourceLocation = capeResourceLocation;
             }
         }
-        if(prideCapeFlags$checkTexture(capeResourceLocation)) return;
+        if(prideCapeFlags$invalidTexture(capeResourceLocation)) return;
         value = new PlayerSkin(value.body(), new CapeTexture(capeResourceLocation), new CapeTexture(elytraResourceLocation), value.model(), value.secure());
         cir.setReturnValue(value);
     }
 
     @Unique
-    private static boolean prideCapeFlags$checkTexture(Identifier textureId){
+    private static boolean prideCapeFlags$invalidTexture(Identifier textureId){
         return Minecraft.getInstance().getResourceManager().getResource(textureId.withPath(path->"flags/"+path+".png")).isEmpty();
     }
 }
