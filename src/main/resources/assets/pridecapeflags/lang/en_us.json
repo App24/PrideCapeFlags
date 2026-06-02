@@ -1,13 +1,5 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
-
-  "examplemod.configuration.title": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
-  "examplemod.configuration.items": "Item List",
-  "examplemod.configuration.logDirtBlock": "Log Dirt Block",
-  "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "pridecapeflags.configuration.elytra_pride_cape": "Elytra Cape Texture",
+  "pridecapeflags.configuration.pride_cape": "Cape Texture",
+  "pridecapeflags.configuration.use_elytra_cape": "Use Separate Elytra Texture"
 }

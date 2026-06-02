@@ -15,7 +15,7 @@ import org.github.app24.pridecapeflags.network.ServerPayloadHandler;
 public class NetworkEvents {
     @SubscribeEvent
     static void PayloadHandlerEvent(final RegisterPayloadHandlersEvent event){
-        final PayloadRegistrar registrar = event.registrar("1");
+        final PayloadRegistrar registrar = event.registrar("1").optional();
         registrar.playBidirectional(
                 CapeFlagPacket.TYPE,
                 CapeFlagPacket.STREAM_CODEC,
@@ -25,7 +25,7 @@ public class NetworkEvents {
                 )
         );
 
-        registrar.commonToServer(
+        registrar.playToServer(
                 CapeFlagRequestPacket.TYPE,
                 CapeFlagRequestPacket.STREAM_CODEC,
                 ServerPayloadHandler::handleCapeFlagRequestOnMain

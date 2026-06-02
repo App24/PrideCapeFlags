@@ -28,10 +28,18 @@ public abstract class AbstractClientPlayerMixin extends Player {
         }
         var capeFlag = this.isLocalPlayer() ? PrideCapeFlagsModClient.CAPE_FLAG : PrideCapeFlagsModClient.PLAYER_CAPES.get(this.getStringUUID());
         var value = cir.getReturnValue();
-        var resourceLocation = ResourceLocation.tryParse(capeFlag);
-        if(resourceLocation == null) return;
-        if(Minecraft.getInstance().getTextureManager().getTexture(resourceLocation) == MissingTextureAtlasSprite.getTexture()) return;
-        value = new PlayerSkin(value.texture(), value.textureUrl(), resourceLocation, value.elytraTexture(), value.model(), value.secure());
+        var capeResourceLocation = ResourceLocation.tryParse(capeFlag.getCapeResourceLocation());
+        if(capeResourceLocation == null) return;
+        var elytraResourceLocation = capeResourceLocation;
+        if(capeFlag.isUseElytra()){
+            elytraResourceLocation = ResourceLocation.tryParse(capeFlag.getElytraResourceLocation());
+            if(elytraResourceLocation == null) return;
+            if(Minecraft.getInstance().getTextureManager().getTexture(elytraResourceLocation) == MissingTextureAtlasSprite.getTexture()){
+                elytraResourceLocation = capeResourceLocation;
+            }
+        }
+        if(Minecraft.getInstance().getTextureManager().getTexture(capeResourceLocation) == MissingTextureAtlasSprite.getTexture()) return;
+        value = new PlayerSkin(value.texture(), value.textureUrl(), capeResourceLocation, elytraResourceLocation, value.model(), value.secure());
         cir.setReturnValue(value);
     }
 }

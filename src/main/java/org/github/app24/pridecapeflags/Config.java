@@ -15,5 +15,13 @@ public class Config {
             .comment("Pride Cap Flag")
             .define("pride_cape", PrideCapeFlagsMod.MODID+":flags/trans.png");
 
+    public static final ModConfigSpec.BooleanValue USE_ELYTRA_CAPE = BUILDER
+            .comment("Use Elytra Texture")
+            .define("use_elytra_cape", false);
+
+    public static final ModConfigSpec.ConfigValue<String> ELYTRA_PRIDE_CAPE_FLAG = BUILDER
+            .comment("Elytra Pride Cap Flag")
+            .define("elytra_pride_cape", PrideCapeFlagsMod.MODID+":flags/trans.png");
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }

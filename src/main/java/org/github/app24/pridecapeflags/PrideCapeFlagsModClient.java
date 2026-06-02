@@ -23,8 +23,8 @@ import java.util.HashMap;
 // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = PrideCapeFlagsMod.MODID, value = Dist.CLIENT)
 public class PrideCapeFlagsModClient {
-    public static String CAPE_FLAG = "";
-    public static final HashMap<String, String> PLAYER_CAPES = Maps.newHashMap();
+    public static CapeFlagData CAPE_FLAG = CapeFlagData.Empty();
+    public static final HashMap<String, CapeFlagData> PLAYER_CAPES = Maps.newHashMap();
 
     public PrideCapeFlagsModClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
@@ -37,12 +37,12 @@ public class PrideCapeFlagsModClient {
 
     @SubscribeEvent
     static void OnConfigurationLoaded(ModConfigEvent.Loading event){
-        CAPE_FLAG = Config.PRIDE_CAPE_FLAG.get();
+        updateConfig();
     }
 
     @SubscribeEvent
     static void OnConfigurationReloaded(ModConfigEvent.Reloading event){
-        CAPE_FLAG = Config.PRIDE_CAPE_FLAG.get();
+        updateConfig();
         if(Minecraft.getInstance().getConnection() !=null){
             sendCapeToServer();
         }
@@ -55,11 +55,21 @@ public class PrideCapeFlagsModClient {
         sendCapeToServer();
     }
 
+    static void updateConfig(){
+        CAPE_FLAG.setCapeResourceLocation(Config.PRIDE_CAPE_FLAG.get());
+        CAPE_FLAG.setUseElytra(Config.USE_ELYTRA_CAPE.get());
+        CAPE_FLAG.setElytraResourceLocation(Config.ELYTRA_PRIDE_CAPE_FLAG.get());
+    }
+
     static void sendCapeToServer(){
-        PacketDistributor.sendToServer(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().getId().toString(), Config.PRIDE_CAPE_FLAG.get()));
+        try {
+            PacketDistributor.sendToServer(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().getId().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
+        }catch(Exception ignored){}
     }
 
     static void receiveCapesFromServer(){
+        try {
         PacketDistributor.sendToServer(new CapeFlagRequestPacket());
+        }catch(Exception ignored){}
     }
 }

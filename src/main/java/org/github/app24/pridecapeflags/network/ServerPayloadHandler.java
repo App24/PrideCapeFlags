@@ -6,16 +6,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import org.github.app24.pridecapeflags.CapeFlagData;
 
 import java.util.HashMap;
 import java.util.Objects;
 
 public class ServerPayloadHandler {
-    public static final HashMap<String, String> PLAYER_CAPES = Maps.newHashMap();
+    public static final HashMap<String, CapeFlagData> PLAYER_CAPES = Maps.newHashMap();
 
     public static void handleCapeData(CapeFlagPacket data, final IPayloadContext context){
-        data = new CapeFlagPacket(context.player().getStringUUID(), data.resourceLocation());
-        PLAYER_CAPES.put(data.uuid(), data.resourceLocation());
+        data = new CapeFlagPacket(context.player().getStringUUID(), data.capeResourceLocation(), data.useElytra(), data.elytraResourceLocation());
+        PLAYER_CAPES.put(data.uuid(), CapeFlagData.FromPacket(data));
         MinecraftServer server = Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer(), "Cannot send clientbound payloads on the client");
         var players = server.getPlayerList().getPlayers();
         for (ServerPlayer serverplayer : players) {
@@ -25,8 +26,8 @@ public class ServerPayloadHandler {
     }
 
     public static void handleCapeFlagRequestOnMain(final CapeFlagRequestPacket data, final IPayloadContext context){
-        PLAYER_CAPES.forEach((uuid, resourceLocation)->{
-            var capeFlag = new CapeFlagPacket(resourceLocation, uuid);
+        PLAYER_CAPES.forEach((uuid, capeData)->{
+            var capeFlag = new CapeFlagPacket(uuid, capeData.getCapeResourceLocation(), capeData.isUseElytra(), capeData.getElytraResourceLocation());
             PacketDistributor.sendToPlayer((ServerPlayer) context.player(), capeFlag);
         });
     }
