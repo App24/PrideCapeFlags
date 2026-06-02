@@ -5,14 +5,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.PlayerSkin;
 import org.github.app24.pridecapeflags.CapeTexture;
-import org.github.app24.pridecapeflags.PrideCapeFlagsMod;
 import org.github.app24.pridecapeflags.PrideCapeFlagsModClient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -36,8 +35,17 @@ public abstract class AbstractClientPlayerMixin extends Player implements Client
         if(capeFlag.isUseElytra()){
             elytraResourceLocation = Identifier.tryParse(capeFlag.getElytraResourceLocation());
             if(elytraResourceLocation == null) return;
+            if(prideCapeFlags$checkTexture(elytraResourceLocation)){
+                elytraResourceLocation = capeResourceLocation;
+            }
         }
+        if(prideCapeFlags$checkTexture(capeResourceLocation)) return;
         value = new PlayerSkin(value.body(), new CapeTexture(capeResourceLocation), new CapeTexture(elytraResourceLocation), value.model(), value.secure());
         cir.setReturnValue(value);
+    }
+
+    @Unique
+    private static boolean prideCapeFlags$checkTexture(Identifier textureId){
+        return Minecraft.getInstance().getResourceManager().getResource(textureId.withPath(path->"flags/"+path+".png")).isEmpty();
     }
 }
