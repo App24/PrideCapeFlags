@@ -39,7 +39,7 @@ public abstract class AbstractClientPlayerMixin extends Player {
             }
         }
         if(Minecraft.getInstance().getTextureManager().getTexture(capeResourceLocation) == MissingTextureAtlasSprite.getTexture()) return;
-        value = new PlayerSkin(value.texture(), value.textureUrl(), capeResourceLocation, elytraResourceLocation, value.model(), value.secure());
+        value = new PlayerSkin(value.texture(), value.textureUrl(), capeResourceLocation.withPath(path->"flags/"+path+".png"), elytraResourceLocation.withPath(path->"flags/"+path+".png"), value.model(), value.secure());
         cir.setReturnValue(value);
     }
 }
