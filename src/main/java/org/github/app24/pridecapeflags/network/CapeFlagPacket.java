@@ -4,11 +4,11 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.github.app24.pridecapeflags.PrideCapeFlagsMod;
 
 public record CapeFlagPacket(String uuid, String capeResourceLocation, boolean useElytra, String elytraResourceLocation) implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<CapeFlagPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(PrideCapeFlagsMod.MODID, "cape_flag"));
+    public static final CustomPacketPayload.Type<CapeFlagPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(PrideCapeFlagsMod.MODID, "cape_flag"));
 
     public static final StreamCodec<ByteBuf, CapeFlagPacket> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,

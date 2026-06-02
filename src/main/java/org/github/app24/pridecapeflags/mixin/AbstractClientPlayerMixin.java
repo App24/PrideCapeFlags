@@ -2,12 +2,14 @@ package org.github.app24.pridecapeflags.mixin;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
-import net.minecraft.client.resources.PlayerSkin;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.PlayerSkin;
+import org.github.app24.pridecapeflags.CapeTexture;
 import org.github.app24.pridecapeflags.PrideCapeFlagsMod;
 import org.github.app24.pridecapeflags.PrideCapeFlagsModClient;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,9 +18,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractClientPlayer.class)
-public abstract class AbstractClientPlayerMixin extends Player {
-    public AbstractClientPlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
-        super(clientLevel, clientLevel.getSharedSpawnPos(), clientLevel.getSharedSpawnAngle(), gameProfile);
+public abstract class AbstractClientPlayerMixin extends Player implements ClientAvatarEntity {
+    public AbstractClientPlayerMixin(ClientLevel level, GameProfile gameProfile) {
+        super(level, gameProfile);
     }
 
     @Inject(method = "getSkin", at = @At("RETURN"), cancellable = true)
@@ -28,18 +30,14 @@ public abstract class AbstractClientPlayerMixin extends Player {
         }
         var capeFlag = this.isLocalPlayer() ? PrideCapeFlagsModClient.CAPE_FLAG : PrideCapeFlagsModClient.PLAYER_CAPES.get(this.getStringUUID());
         var value = cir.getReturnValue();
-        var capeResourceLocation = ResourceLocation.tryParse(capeFlag.getCapeResourceLocation());
+        var capeResourceLocation = Identifier.tryParse(capeFlag.getCapeResourceLocation());
         if(capeResourceLocation == null) return;
         var elytraResourceLocation = capeResourceLocation;
         if(capeFlag.isUseElytra()){
-            elytraResourceLocation = ResourceLocation.tryParse(capeFlag.getElytraResourceLocation());
+            elytraResourceLocation = Identifier.tryParse(capeFlag.getElytraResourceLocation());
             if(elytraResourceLocation == null) return;
-            if(Minecraft.getInstance().getTextureManager().getTexture(elytraResourceLocation) == MissingTextureAtlasSprite.getTexture()){
-                elytraResourceLocation = capeResourceLocation;
-            }
         }
-        if(Minecraft.getInstance().getTextureManager().getTexture(capeResourceLocation) == MissingTextureAtlasSprite.getTexture()) return;
-        value = new PlayerSkin(value.texture(), value.textureUrl(), capeResourceLocation, elytraResourceLocation, value.model(), value.secure());
+        value = new PlayerSkin(value.body(), new CapeTexture(capeResourceLocation), new CapeTexture(elytraResourceLocation), value.model(), value.secure());
         cir.setReturnValue(value);
     }
 }
