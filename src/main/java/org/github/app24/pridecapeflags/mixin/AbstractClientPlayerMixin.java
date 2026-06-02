@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import org.github.app24.pridecapeflags.PrideCapeFlagsMod;
 import org.github.app24.pridecapeflags.PrideCapeFlagsModClient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -34,12 +35,17 @@ public abstract class AbstractClientPlayerMixin extends Player {
         if(capeFlag.isUseElytra()){
             elytraResourceLocation = ResourceLocation.tryParse(capeFlag.getElytraResourceLocation());
             if(elytraResourceLocation == null) return;
-            if(Minecraft.getInstance().getTextureManager().getTexture(elytraResourceLocation) == MissingTextureAtlasSprite.getTexture()){
+            if(prideCapeFlags$invalidTexture(elytraResourceLocation)){
                 elytraResourceLocation = capeResourceLocation;
             }
         }
-        if(Minecraft.getInstance().getTextureManager().getTexture(capeResourceLocation) == MissingTextureAtlasSprite.getTexture()) return;
+        if(prideCapeFlags$invalidTexture(capeResourceLocation)) return;
         value = new PlayerSkin(value.texture(), value.textureUrl(), capeResourceLocation.withPath(path->"flags/"+path+".png"), elytraResourceLocation.withPath(path->"flags/"+path+".png"), value.model(), value.secure());
         cir.setReturnValue(value);
+    }
+
+    @Unique
+    private static boolean prideCapeFlags$invalidTexture(ResourceLocation textureId){
+        return Minecraft.getInstance().getTextureManager().getTexture(textureId.withPath(path->"flags/"+path+".png")) == MissingTextureAtlasSprite.getTexture();
     }
 }
