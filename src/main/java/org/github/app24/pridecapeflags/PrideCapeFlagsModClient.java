@@ -2,6 +2,8 @@ package org.github.app24.pridecapeflags;
 
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -71,5 +73,9 @@ public class PrideCapeFlagsModClient {
         try {
         PacketDistributor.sendToServer(new CapeFlagRequestPacket());
         }catch(Exception ignored){}
+    }
+
+    public static boolean checkFlagValid(ResourceLocation textureId){
+        return Minecraft.getInstance().getTextureManager().getTexture(textureId.withPath(path->"flags/"+path+".png")) != MissingTextureAtlasSprite.getTexture();
     }
 }
