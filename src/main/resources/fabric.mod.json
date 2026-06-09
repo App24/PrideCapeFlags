@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "pridecapeflags",
+	"version": "${version}",
+	"name": "Pride Cape Flags",
+	"description": "Adds pride flags as capes.",
+	"authors": [
+		"App24"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/pride-cape-flags"
+	},
+	"license": "MIT License",
+	"icon": "assets/pridecapeflags/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"org.github.app24.pridecapeflags.PrideCapeFlags"
+		],
+		"client": [
+			"org.github.app24.pridecapeflags.client.PrideCapeFlagsClient"
+		],
+		"modmenu": [
+			"org.github.app24.pridecapeflags.client.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"pridecapeflags.mixins.json",
+		{
+			"config": "pridecapeflags.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*",
+		"midnightlib": ">=1.9.3"
+	}
+}

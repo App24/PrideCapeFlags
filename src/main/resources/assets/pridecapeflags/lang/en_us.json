@@ -1,5 +1,6 @@
 {
-  "pridecapeflags.configuration.elytra_pride_cape": "Elytra Cape Texture",
-  "pridecapeflags.configuration.pride_cape": "Cape Texture",
-  "pridecapeflags.configuration.use_elytra_cape": "Use Separate Elytra Texture"
+  "pridecapeflags.midnightconfig.title": "Pride Capes Config",
+  "pridecapeflags.midnightconfig.elytraPrideCapeFlag": "Elytra Cape Texture",
+  "pridecapeflags.midnightconfig.prideCapeFlag": "Cape Texture",
+  "pridecapeflags.midnightconfig.useElytraCape": "Use Separate Elytra Texture"
 }

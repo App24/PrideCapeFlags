@@ -3,7 +3,6 @@ package org.github.app24.pridecapeflags;
 import org.github.app24.pridecapeflags.network.CapeFlagPacket;
 
 public class CapeFlagData {
-
     private String capeResourceLocation;
     private boolean useElytra;
     private String elytraResourceLocation;

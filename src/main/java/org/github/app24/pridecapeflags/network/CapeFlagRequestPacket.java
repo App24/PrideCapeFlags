@@ -4,10 +4,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import org.github.app24.pridecapeflags.PrideCapeFlagsMod;
+import org.github.app24.pridecapeflags.PrideCapeFlags;
 
 public record CapeFlagRequestPacket() implements CustomPacketPayload {
-    public static final CustomPacketPayload.Type<CapeFlagRequestPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(PrideCapeFlagsMod.MODID, "cape_flag_request"));
+    public static final CustomPacketPayload.Type<CapeFlagRequestPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(PrideCapeFlags.MOD_ID, "cape_flag_request"));
 
     public static final StreamCodec<ByteBuf, CapeFlagRequestPacket> STREAM_CODEC = new StreamCodec<ByteBuf, CapeFlagRequestPacket>() {
         @Override
