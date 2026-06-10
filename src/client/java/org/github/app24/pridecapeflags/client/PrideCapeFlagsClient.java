@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.github.app24.pridecapeflags.CapeFlagData;
 import org.github.app24.pridecapeflags.PrideCapeFlags;
 import org.github.app24.pridecapeflags.client.config.ModConfig;
@@ -43,7 +43,7 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 
 	public static void sendCapeToServer(){
 		try {
-			ClientPlayNetworking.send(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().getId().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
+			ClientPlayNetworking.send(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().id().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
 		}catch(Exception ignored){}
 	}
 
@@ -53,7 +53,8 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 		}catch(Exception ignored){}
 	}
 
-	public static boolean checkFlagValid(ResourceLocation textureId){
-		return Minecraft.getInstance().getTextureManager().getTexture(textureId.withPath(path->"flags/"+path+".png")) != MissingTextureAtlasSprite.getTexture();
+	public static boolean checkFlagValid(Identifier textureId){
+		return Minecraft.getInstance().getResourceManager().getResource(textureId.withPath(path->"flags/"+path+".png")).isPresent();
+		//return Minecraft.getInstance().getTextureManager().getTexture(textureId.withPath(path->"flags/"+path+".png")) != MissingTextureAtlasSprite.getTexture();
 	}
 }

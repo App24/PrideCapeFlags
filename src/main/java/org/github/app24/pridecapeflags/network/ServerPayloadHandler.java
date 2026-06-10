@@ -15,7 +15,6 @@ public class ServerPayloadHandler {
     public static final HashMap<String, CapeFlagData> PLAYER_CAPES = Maps.newHashMap();
 
     public static void handleCapeData(CapeFlagPacket data, final ServerPlayNetworking.Context context){
-        PrideCapeFlags.LOGGER.warn(context.player().getGameProfile().getName() + " sends cape");
         data = new CapeFlagPacket(context.player().getStringUUID(), data.capeResourceLocation(), data.useElytra(), data.elytraResourceLocation());
         PLAYER_CAPES.put(data.uuid(), CapeFlagData.FromPacket(data));
         //MinecraftServer server = Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer(), "Cannot send clientbound payloads on the client");
@@ -27,7 +26,6 @@ public class ServerPayloadHandler {
     }
 
     public static void handleCapeFlagRequestOnMain(final CapeFlagRequestPacket data, final ServerPlayNetworking.Context context){
-        PrideCapeFlags.LOGGER.warn(context.player().getGameProfile().getName() + " requests capes");
         PLAYER_CAPES.forEach((uuid, capeData)->{
             var capeFlag = new CapeFlagPacket(uuid, capeData.getCapeResourceLocation(), capeData.isUseElytra(), capeData.getElytraResourceLocation());
             //PacketDistributor.sendToPlayer((ServerPlayer) context.player(), capeFlag);
