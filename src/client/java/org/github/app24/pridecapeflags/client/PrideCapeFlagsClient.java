@@ -24,7 +24,7 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ClientPlayNetworking.registerGlobalReceiver(CapeFlagPacket.TYPE, ClientPayloadHandler::handleCapeData);
+		ClientPlayNetworking.registerGlobalReceiver(CapeFlagPacket.PACKET_ID, ClientPayloadHandler::handleCapeData);
 
 		MidnightConfig.init(PrideCapeFlags.MOD_ID, ModConfig.class);
 
@@ -43,13 +43,13 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 
 	public static void sendCapeToServer(){
 		try {
-			ClientPlayNetworking.send(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().getId().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
+			ClientPlayNetworking.send(CapeFlagPacket.PACKET_ID, new CapeFlagPacket(Minecraft.getInstance().getUser().getUuid(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()).ToByteBuf());
 		}catch(Exception ignored){}
 	}
 
 	static void receiveCapesFromServer(){
 		try {
-			ClientPlayNetworking.send(new CapeFlagRequestPacket());
+			ClientPlayNetworking.send(CapeFlagRequestPacket.PACKET_ID, new CapeFlagRequestPacket().ToByteBuf());
 		}catch(Exception ignored){}
 	}
 

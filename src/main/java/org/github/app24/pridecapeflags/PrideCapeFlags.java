@@ -2,7 +2,6 @@ package org.github.app24.pridecapeflags;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import org.github.app24.pridecapeflags.network.CapeFlagPacket;
 import org.github.app24.pridecapeflags.network.CapeFlagRequestPacket;
@@ -20,15 +19,15 @@ public class PrideCapeFlags implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		var c2s = PayloadTypeRegistry.playC2S();
+		/*var c2s = PayloadTypeRegistry.playC2S();
 		var s2c = PayloadTypeRegistry.playS2C();
 
 		c2s.register(CapeFlagPacket.TYPE, CapeFlagPacket.STREAM_CODEC);
 		c2s.register(CapeFlagRequestPacket.TYPE, CapeFlagRequestPacket.STREAM_CODEC);
 
-		s2c.register(CapeFlagPacket.TYPE, CapeFlagPacket.STREAM_CODEC);
+		s2c.register(CapeFlagPacket.TYPE, CapeFlagPacket.STREAM_CODEC);*/
 
-		ServerPlayNetworking.registerGlobalReceiver(CapeFlagPacket.TYPE, ServerPayloadHandler::handleCapeData);
-		ServerPlayNetworking.registerGlobalReceiver(CapeFlagRequestPacket.TYPE, ServerPayloadHandler::handleCapeFlagRequestOnMain);
+		ServerPlayNetworking.registerGlobalReceiver(CapeFlagPacket.PACKET_ID, ServerPayloadHandler::handleCapeData);
+		ServerPlayNetworking.registerGlobalReceiver(CapeFlagRequestPacket.PACKET_ID, ServerPayloadHandler::handleCapeFlagRequestOnMain);
 	}
 }
