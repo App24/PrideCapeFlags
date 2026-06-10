@@ -3,7 +3,7 @@
 	"package": "org.github.app24.pridecapeflags.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+
 	],
 	"injectors": {
 		"defaultRequire": 1
