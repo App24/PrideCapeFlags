@@ -1,7 +1,6 @@
 package org.github.app24.pridecapeflags.client.mixin;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.resources.Identifier;
@@ -12,7 +11,6 @@ import org.github.app24.pridecapeflags.client.PrideCapeFlagsClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractClientPlayer.class)
@@ -27,11 +25,12 @@ public abstract class AbstractClientPlayerMixin extends Player {
 			return;
 		}
 		var capeFlag = this.isLocalPlayer() ? PrideCapeFlagsClient.CAPE_FLAG : PrideCapeFlagsClient.PLAYER_CAPES.get(this.getStringUUID());
+		if(!capeFlag.showCape()) return;
 		var value = cir.getReturnValue();
 		var capeResourceLocation = Identifier.tryParse(capeFlag.getCapeResourceLocation());
 		if(capeResourceLocation == null) return;
 		var elytraResourceLocation = capeResourceLocation;
-		if(capeFlag.isUseElytra()){
+		if(capeFlag.useElytra()){
 			elytraResourceLocation = Identifier.tryParse(capeFlag.getElytraResourceLocation());
 			if(elytraResourceLocation == null) return;
 			if(!PrideCapeFlagsClient.checkFlagValid(elytraResourceLocation)){
