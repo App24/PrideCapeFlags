@@ -20,8 +20,8 @@ public class PrideCapeFlags implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		var c2s = PayloadTypeRegistry.playC2S();
-		var s2c = PayloadTypeRegistry.playS2C();
+		var c2s = PayloadTypeRegistry.serverboundPlay();
+		var s2c = PayloadTypeRegistry.clientboundPlay();
 
 		c2s.register(CapeFlagPacket.TYPE, CapeFlagPacket.STREAM_CODEC);
 		c2s.register(CapeFlagRequestPacket.TYPE, CapeFlagRequestPacket.STREAM_CODEC);
