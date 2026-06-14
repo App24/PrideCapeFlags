@@ -6,12 +6,13 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import org.github.app24.pridecapeflags.PrideCapeFlags;
 
-public record CapeFlagPacket(String uuid, String capeResourceLocation, boolean useElytra, String elytraResourceLocation) {
+public record CapeFlagPacket(String uuid, boolean showCape, String capeResourceLocation, boolean useElytra, String elytraResourceLocation) {
     public static final ResourceLocation PACKET_ID = ResourceLocation.tryBuild(PrideCapeFlags.MOD_ID, "cape_flag");
 
     public FriendlyByteBuf ToByteBuf(){
         FriendlyByteBuf buf = PacketByteBufs.create();
         buf.writeUtf(uuid);
+        buf.writeBoolean(showCape);
         buf.writeUtf(capeResourceLocation);
         buf.writeBoolean(useElytra);
         buf.writeUtf(elytraResourceLocation);
@@ -20,10 +21,11 @@ public record CapeFlagPacket(String uuid, String capeResourceLocation, boolean u
 
     public static CapeFlagPacket FromBuff(FriendlyByteBuf buff){
         var uuid = buff.readUtf();
+        var showCape = buff.readBoolean();
         var capeResourceLocation = buff.readUtf();
         var useElytra = buff.readBoolean();
         var elytraResourceLocation = buff.readUtf();
-        return new CapeFlagPacket(uuid,capeResourceLocation,useElytra,elytraResourceLocation);
+        return new CapeFlagPacket(uuid, showCape,capeResourceLocation,useElytra,elytraResourceLocation);
     }
 
     /*public static final CustomPacketPayload.Type<CapeFlagPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(PrideCapeFlags.MOD_ID, "cape_flag"));
