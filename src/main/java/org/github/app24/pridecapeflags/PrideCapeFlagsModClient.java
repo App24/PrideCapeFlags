@@ -58,6 +58,7 @@ public class PrideCapeFlagsModClient {
     }
 
     static void updateConfig(){
+        CAPE_FLAG.setShowCape(Config.SHOW_PRIDE_CAPE.get());
         CAPE_FLAG.setCapeResourceLocation(Config.PRIDE_CAPE_FLAG.get());
         CAPE_FLAG.setUseElytra(Config.USE_ELYTRA_CAPE.get());
         CAPE_FLAG.setElytraResourceLocation(Config.ELYTRA_PRIDE_CAPE_FLAG.get());
@@ -65,7 +66,7 @@ public class PrideCapeFlagsModClient {
 
     static void sendCapeToServer(){
         try {
-            PacketDistributor.sendToServer(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().getId().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
+            PacketDistributor.sendToServer(CAPE_FLAG.ToPacket());
         }catch(Exception ignored){}
     }
 
