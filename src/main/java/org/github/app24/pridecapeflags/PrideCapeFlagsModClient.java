@@ -14,7 +14,6 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.github.app24.pridecapeflags.network.CapeFlagPacket;
 import org.github.app24.pridecapeflags.network.CapeFlagRequestPacket;
 
@@ -58,6 +57,7 @@ public class PrideCapeFlagsModClient {
     }
 
     static void updateConfig(){
+        CAPE_FLAG.setShowCape(Config.SHOW_PRIDE_CAPE.get());
         CAPE_FLAG.setCapeResourceLocation(Config.PRIDE_CAPE_FLAG.get());
         CAPE_FLAG.setUseElytra(Config.USE_ELYTRA_CAPE.get());
         CAPE_FLAG.setElytraResourceLocation(Config.ELYTRA_PRIDE_CAPE_FLAG.get());
@@ -65,7 +65,7 @@ public class PrideCapeFlagsModClient {
 
     static void sendCapeToServer(){
         try {
-            ClientPacketDistributor.sendToServer(new CapeFlagPacket(Minecraft.getInstance().getGameProfile().id().toString(), CAPE_FLAG.getCapeResourceLocation(), CAPE_FLAG.isUseElytra(), CAPE_FLAG.getElytraResourceLocation()));
+            ClientPacketDistributor.sendToServer(CAPE_FLAG.ToPacket());
         }catch(Exception ignored){}
     }
 

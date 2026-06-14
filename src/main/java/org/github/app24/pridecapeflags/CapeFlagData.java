@@ -1,27 +1,33 @@
 package org.github.app24.pridecapeflags;
 
+import net.minecraft.client.Minecraft;
 import org.github.app24.pridecapeflags.network.CapeFlagPacket;
 
 public class CapeFlagData {
 
+    private boolean showCape;
     private String capeResourceLocation;
     private boolean useElytra;
     private String elytraResourceLocation;
 
-    public CapeFlagData(String capeResourceLocation, boolean useElytra, String elytraResourceLocation){
+    public CapeFlagData(boolean showCape, String capeResourceLocation, boolean useElytra, String elytraResourceLocation){
+        this.showCape = showCape;
         this.capeResourceLocation = capeResourceLocation;
         this.useElytra = useElytra;
         this.elytraResourceLocation = elytraResourceLocation;
     }
 
     public static CapeFlagData Empty(){
-        return new CapeFlagData("", false, "");
+        return new CapeFlagData(true, "", false, "");
     }
 
     public static CapeFlagData FromPacket(CapeFlagPacket packet){
-        return new CapeFlagData(packet.capeResourceLocation(), packet.useElytra(), packet.elytraResourceLocation());
+        return new CapeFlagData(packet.showCape(), packet.capeResourceLocation(), packet.useElytra(), packet.elytraResourceLocation());
     }
 
+    public CapeFlagPacket ToPacket(){
+        return new CapeFlagPacket(Minecraft.getInstance().getUser().getProfileId().toString(), showCape, capeResourceLocation, useElytra, elytraResourceLocation);
+    }
 
     public String getCapeResourceLocation() {
         return capeResourceLocation;
@@ -31,7 +37,7 @@ public class CapeFlagData {
         this.capeResourceLocation = capeResourceLocation;
     }
 
-    public boolean isUseElytra() {
+    public boolean useElytra() {
         return useElytra;
     }
 
@@ -45,5 +51,13 @@ public class CapeFlagData {
 
     public void setElytraResourceLocation(String elytraResourceLocation) {
         this.elytraResourceLocation = elytraResourceLocation;
+    }
+
+    public boolean showCape() {
+        return showCape;
+    }
+
+    public void setShowCape(boolean showCape) {
+        this.showCape = showCape;
     }
 }

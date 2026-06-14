@@ -7,13 +7,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    public static final ModConfigSpec.BooleanValue SHOW_PRIDE_CAPE = BUILDER
+            .comment("Show Pride Cape")
+            .define("show_pride_cape", true);
+
     public static final ModConfigSpec.ConfigValue<String> PRIDE_CAPE_FLAG = BUILDER
-            .comment("Pride Cap Flag")
+            .comment("Pride Cape Flag")
             .define("pride_cape", PrideCapeFlagsMod.MODID+":pride", Config::validateFlagName);
 
     public static final ModConfigSpec.BooleanValue USE_ELYTRA_CAPE = BUILDER
