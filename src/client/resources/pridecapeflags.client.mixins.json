@@ -3,7 +3,9 @@
   "package": "org.github.app24.pridecapeflags.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "AbstractClientPlayerMixin"
+    "AbstractClientPlayerMixin",
+    "LogoRendererMixin",
+    "SplashManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
