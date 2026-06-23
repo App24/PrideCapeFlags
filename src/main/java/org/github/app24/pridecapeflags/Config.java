@@ -10,6 +10,10 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    public static final ModConfigSpec.BooleanValue SHOW_PRIDE_TITLE = BUILDER
+            .comment("Show Pride Title during Pride Month")
+            .define("show_pride_title", true);
+
     public static final ModConfigSpec.BooleanValue SHOW_PRIDE_CAPE = BUILDER
             .comment("Show Pride Cape")
             .define("show_pride_cape", true);
