@@ -30,6 +30,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Calendar;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(PrideCapeFlagsMod.MODID)
 public class PrideCapeFlagsMod {
@@ -37,6 +39,10 @@ public class PrideCapeFlagsMod {
     public static final String MODID = "pridecapeflags";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    static Calendar calendar;
+
+    public static boolean IS_PRIDE = false;
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -54,6 +60,11 @@ public class PrideCapeFlagsMod {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
+
+        calendar = Calendar.getInstance();
+        if (calendar.get(Calendar.MONTH) + 1 == 6) {
+            IS_PRIDE = true;
+        }
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
