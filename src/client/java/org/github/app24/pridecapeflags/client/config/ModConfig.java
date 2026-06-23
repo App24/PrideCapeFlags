@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 public class ModConfig extends MidnightConfig {
     @Entry()
+    public static boolean showPrideTitle = true;
+    @Entry()
     public static boolean showPrideCape = true;
     @Entry()
     public static String prideCapeFlag = PrideCapeFlags.MOD_ID + ":pride";

@@ -9,6 +9,8 @@ import org.github.app24.pridecapeflags.network.ServerPayloadHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Calendar;
+
 public class PrideCapeFlags implements ModInitializer {
 	public static final String MOD_ID = "pridecapeflags";
 
@@ -16,6 +18,10 @@ public class PrideCapeFlags implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	static Calendar calendar;
+
+	public static boolean IS_PRIDE = false;
 
 	@Override
 	public void onInitialize() {
@@ -29,5 +35,10 @@ public class PrideCapeFlags implements ModInitializer {
 
 		ServerPlayNetworking.registerGlobalReceiver(CapeFlagPacket.PACKET_ID, ServerPayloadHandler::handleCapeData);
 		ServerPlayNetworking.registerGlobalReceiver(CapeFlagRequestPacket.PACKET_ID, ServerPayloadHandler::handleCapeFlagRequestOnMain);
+
+		calendar = Calendar.getInstance();
+		if (calendar.get(Calendar.MONTH) + 1 == 6) {
+			IS_PRIDE = true;
+		}
 	}
 }
