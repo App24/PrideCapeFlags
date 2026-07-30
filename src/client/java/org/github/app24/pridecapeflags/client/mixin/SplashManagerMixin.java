@@ -14,7 +14,7 @@ public class SplashManagerMixin {
 
     @Inject(method = "getSplash", at = @At("RETURN"), cancellable = true)
     private void getSplash(CallbackInfoReturnable<SplashRenderer> cir){
-        if(PrideCapeFlags.IS_PRIDE && ModConfig.showPrideTitle){
+        if(PrideCapeFlags.IS_PRIDE && ModConfig.INSTANCE().showPrideTitle){
             cir.setReturnValue(new SplashRenderer(SplashManager.literalSplash("HAPPY PRIDE")));
         }
     }

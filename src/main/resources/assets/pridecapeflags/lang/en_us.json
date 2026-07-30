@@ -1,8 +1,8 @@
 {
-  "pridecapeflags.midnightconfig.title": "Pride Capes Config",
-  "pridecapeflags.midnightconfig.showPrideTitle": "Show Pride Title during Pride",
-  "pridecapeflags.midnightconfig.showPrideCape": "Show Pride Cape",
-  "pridecapeflags.midnightconfig.elytraPrideCapeFlag": "Elytra Cape Texture",
-  "pridecapeflags.midnightconfig.prideCapeFlag": "Cape Texture",
-  "pridecapeflags.midnightconfig.useElytraCape": "Use Separate Elytra Texture"
+  "yacl3.config.pridecapeflags:pridecapeflags.category.pridecapeflags": "Pride Capes Config",
+  "yacl3.config.pridecapeflags:pridecapeflags.showPrideTitle": "Show Pride Title during Pride",
+  "yacl3.config.pridecapeflags:pridecapeflags.showPrideCape": "Show Pride Cape",
+  "yacl3.config.pridecapeflags:pridecapeflags.elytraPrideCapeFlag": "Elytra Cape Texture",
+  "yacl3.config.pridecapeflags:pridecapeflags.prideCapeFlag": "Cape Texture",
+  "yacl3.config.pridecapeflags:pridecapeflags.useElytraCape": "Use Separate Elytra Texture"
 }

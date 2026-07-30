@@ -13,7 +13,8 @@ repositories {
 	}
 
 	maven {
-		url = "https://maven.midnightdust.eu/releases"
+		name 'Xander Maven'
+		url 'https://maven.isxander.dev/releases'
 	}
 }
 
@@ -41,7 +42,7 @@ dependencies {
 
 	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	implementation include ("eu.midnightdust:midnightlib:${project.midnightlib_version}")
+	implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 }
 
 processResources {

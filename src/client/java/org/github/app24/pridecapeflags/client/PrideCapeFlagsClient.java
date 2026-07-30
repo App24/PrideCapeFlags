@@ -1,13 +1,10 @@
 package org.github.app24.pridecapeflags.client;
 
 import com.google.common.collect.Maps;
-import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.resources.Identifier;
 import org.github.app24.pridecapeflags.CapeFlagData;
 import org.github.app24.pridecapeflags.PrideCapeFlags;
@@ -26,7 +23,10 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ClientPlayNetworking.registerGlobalReceiver(CapeFlagPacket.TYPE, ClientPayloadHandler::handleCapeData);
 
-		MidnightConfig.init(PrideCapeFlags.MOD_ID, ModConfig.class);
+		ModConfig.HANDLER.load();
+		updateConfig();
+
+//		MidnightConfig.init(PrideCapeFlags.MOD_ID, ModConfig.class);
 
 		ClientPlayConnectionEvents.JOIN.register((clientPacketListener, packetSender, minecraft) -> {
 			PLAYER_CAPES.clear();
@@ -36,10 +36,10 @@ public class PrideCapeFlagsClient implements ClientModInitializer {
 	}
 
 	public static void updateConfig(){
-		CAPE_FLAG.setShowCape(ModConfig.showPrideCape);
-		CAPE_FLAG.setCapeResourceLocation(ModConfig.prideCapeFlag);
-		CAPE_FLAG.setUseElytra(ModConfig.useElytraCape);
-		CAPE_FLAG.setElytraResourceLocation(ModConfig.elytraPrideCapeFlag);
+		CAPE_FLAG.setShowCape(ModConfig.INSTANCE().showPrideCape);
+		CAPE_FLAG.setCapeResourceLocation(ModConfig.INSTANCE().prideCapeFlag);
+		CAPE_FLAG.setUseElytra(ModConfig.INSTANCE().useElytraCape);
+		CAPE_FLAG.setElytraResourceLocation(ModConfig.INSTANCE().elytraPrideCapeFlag);
 	}
 
 	public static void sendCapeToServer(){

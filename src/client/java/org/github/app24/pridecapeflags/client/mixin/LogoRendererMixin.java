@@ -2,7 +2,7 @@ package org.github.app24.pridecapeflags.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.renderpearl.api.pipeline.RenderPipeline;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -20,9 +20,9 @@ public class LogoRendererMixin {
     @Unique
     private static final Identifier MINECRAFT_EDITION = Identifier.fromNamespaceAndPath(PrideCapeFlags.MOD_ID,"textures/gui/title/edition.png");
 
-    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IFI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIII)V", ordinal = 0))
+    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IFI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIII)V", ordinal = 0))
     private void renderPrideCraftLogo(GuiGraphicsExtractor instance, RenderPipeline renderPipeline, Identifier texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight, int color, Operation<Void> original){
-        if(!PrideCapeFlags.IS_PRIDE || !ModConfig.showPrideTitle){
+        if(!PrideCapeFlags.IS_PRIDE || !ModConfig.INSTANCE().showPrideTitle){
             original.call(instance, renderPipeline, texture, x, y, u, v, width, height, textureWidth, textureHeight, color);
             return;
         }
@@ -31,9 +31,9 @@ public class LogoRendererMixin {
         );
     }
 
-    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IFI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIII)V", ordinal = 1))
+    @WrapOperation(method = "extractRenderState(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IFI)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIII)V", ordinal = 1))
     private void renderPrideEdition(GuiGraphicsExtractor instance, RenderPipeline renderPipeline, Identifier texture, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight, int color, Operation<Void> original){
-        if(!PrideCapeFlags.IS_PRIDE || !ModConfig.showPrideTitle){
+        if(!PrideCapeFlags.IS_PRIDE || !ModConfig.INSTANCE().showPrideTitle){
             original.call(instance, renderPipeline, texture, x, y, u, v, width, height, textureWidth, textureHeight, color);
             return;
         }
