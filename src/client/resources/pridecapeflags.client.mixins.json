@@ -13,6 +13,9 @@
   },
   "mixins": [
     "LogoRendererMixin",
+    "PauseScreenMixin",
     "SplashManagerMixin"
-  ]
+  ],
+  "mixinextras": {
+    "minVersion": "0.5.4"}
 }

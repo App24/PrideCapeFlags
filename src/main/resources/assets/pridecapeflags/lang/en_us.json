@@ -4,5 +4,18 @@
   "pridecapeflags.midnightconfig.showPrideCape": "Show Pride Cape",
   "pridecapeflags.midnightconfig.elytraPrideCapeFlag": "Elytra Cape Texture",
   "pridecapeflags.midnightconfig.prideCapeFlag": "Cape Texture",
-  "pridecapeflags.midnightconfig.useElytraCape": "Use Separate Elytra Texture"
+  "pridecapeflags.midnightconfig.useElytraCape": "Use Separate Elytra Texture",
+
+  "pridecapeflags.config.menu.title": "Pride Capes Config",
+  "pridecapeflags.config.menu.showElytra": "Show Elytra",
+  "pridecapeflags.config.menu.prideCapeFlag": "Pride Cape Name",
+  "pridecapeflags.config.menu.elytraCapeFlag": "Elytra Pride Cape Name",
+  "pridecapeflags.menu.settings": "Pride Cape Settings",
+  "pridecapeflags.config.menu.showCape": "Show Pride Cape",
+
+  "pridecapeflags.gui.apply": "Apply",
+  "pridecapeflags.config.editCape": "Edit Cape",
+
+  "pridecapeflags.not_in_world.title": "Unavailable in Main Menu",
+  "pridecapeflags.not_in_world": "You need to be in a world to edit your pride cape."
 }
