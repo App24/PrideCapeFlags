@@ -5,9 +5,10 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.network.chat.Component;
 import org.github.app24.pridecapeflags.PrideCapeFlags;
+import org.github.app24.pridecapeflags.client.gui.ConfigScreen;
 
 public class ModMenuIntegration implements ModMenuApi {    @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> MidnightConfig.getScreen(parent, PrideCapeFlags.MOD_ID);
+        return parent -> new ConfigScreen(parent, PrideCapeFlags.MOD_ID);
     }
 }

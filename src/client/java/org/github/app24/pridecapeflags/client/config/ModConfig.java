@@ -14,13 +14,17 @@ public class ModConfig extends MidnightConfig {
     @Entry()
     public static boolean showPrideTitle = true;
     @Entry()
+    @Hidden
     public static boolean showPrideCape = true;
     @Entry()
+    @Hidden
     public static String prideCapeFlag = PrideCapeFlags.MOD_ID + ":pride";
     @Entry()
+    @Hidden
     public static boolean useElytraCape = false;
     @Condition(requiredOption = PrideCapeFlags.MOD_ID+":useElytraCape", visibleButLocked = true)
     @Entry()
+    @Hidden
     public static String elytraPrideCapeFlag = PrideCapeFlags.MOD_ID + ":pride";
 
     @Override
