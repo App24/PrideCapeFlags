@@ -74,10 +74,10 @@ public class PrideCapeFlagsScreen extends Screen {
 
 
         {
-            SpriteIconButton resetButton = SpriteIconButton.builder(Component.translatable("controls.reset"), button -> {
+            var resetButton = Button.builder(Component.literal("R"), button -> {
                         this.capeFlagBox.setValue(ModConfig.prideCapeFlag);
-                    }, true)
-                    .sprite(Identifier.fromNamespaceAndPath("midnightlib", "icon/reset"), 12, 12).size(20, 20).build();
+                    })
+                    .size(20, 20).build();
 
             resetButton.setPosition(capeFlagBoxX + 150+5, yP);
 
@@ -93,10 +93,10 @@ public class PrideCapeFlagsScreen extends Screen {
 
 
         {
-            SpriteIconButton resetButton = SpriteIconButton.builder(Component.translatable("controls.reset"), button -> {
+            var resetButton = Button.builder(Component.literal("R"), button -> {
                         this.elytraFlagBox.setValue(ModConfig.elytraPrideCapeFlag);
-                    }, true)
-                    .sprite(Identifier.fromNamespaceAndPath("midnightlib", "icon/reset"), 12, 12).size(20, 20).build();
+                    })
+                    .size(20, 20).build();
 
             resetButton.setPosition(capeFlagBoxX + 150+5, yP+70);
 
@@ -120,14 +120,14 @@ public class PrideCapeFlagsScreen extends Screen {
 
 
         {
-            SpriteIconButton resetButton = SpriteIconButton.builder(Component.translatable("controls.reset"), button -> {
+            var resetButton = Button.builder(Component.literal("R"), button -> {
                         this.useElytraCape = ModConfig.useElytraCape;
                         useElytraButton.setValue(this.useElytraCape);
                         button.active = false;
                         this.elytraFlagBox.setEditable(this.useElytraCape);
                         updateApplyButton();
-                    }, true)
-                    .sprite(Identifier.fromNamespaceAndPath("midnightlib", "icon/reset"), 12, 12).size(20, 20).build();
+                    })
+                    .size(20, 20).build();
 
             resetButton.active = false;
 
@@ -145,13 +145,19 @@ public class PrideCapeFlagsScreen extends Screen {
         this.elytraFlagBox.setEditable(this.useElytraCape);
 
         {
-            SpriteIconButton resetButton = SpriteIconButton.builder(Component.translatable("controls.reset"), button -> {
-                        this.showCape = ModConfig.showPrideCape;
-                        showCapeButton.setValue(this.showCape);
-                        button.active = false;
-                        updateApplyButton();
-                    }, true)
-                    .sprite(Identifier.fromNamespaceAndPath("midnightlib", "icon/reset"), 12, 12).size(20, 20).build();
+            var resetButton = Button.builder(Component.literal("R"), button -> {
+                this.showCape = ModConfig.showPrideCape;
+                showCapeButton.setValue(this.showCape);
+                button.active = false;
+                updateApplyButton();
+            }).size(20, 20).build();
+//            SpriteIconButton resetButton = SpriteIconButton.builder(Component.translatable("controls.reset"), button -> {
+//                        this.showCape = ModConfig.showPrideCape;
+//                        showCapeButton.setValue(this.showCape);
+//                        button.active = false;
+//                        updateApplyButton();
+//                    }, true)
+//                    .sprite(Identifier.fromNamespaceAndPath("midnightlib", "icon/reset"), 12, 12).size(20, 20).build();
 
             resetButton.active = false;
 
