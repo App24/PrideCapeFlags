@@ -11,6 +11,7 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.impl.controller.StringControllerBuilderImpl;
 import dev.isxander.yacl3.impl.controller.TickBoxControllerBuilderImpl;
 import net.minecraft.network.chat.Component;
+import org.github.app24.pridecapeflags.client.gui.ConfigScreen;
 
 public class ModMenuIntegration implements ModMenuApi {
     private static <T> void updateConfig(Option<T> option, OptionEventListener.Event event) {
@@ -40,7 +41,7 @@ public class ModMenuIntegration implements ModMenuApi {
                     option.addEventListener(ModMenuIntegration::updateConfig)
             );
 
-            return lib.generateScreen(parent);
+            return new ConfigScreen(lib, parent);
         };
     }
 }

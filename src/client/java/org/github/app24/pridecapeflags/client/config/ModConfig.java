@@ -33,24 +33,24 @@ public class ModConfig {
     public boolean showPrideTitle = true;
 //    @Entry()
     @SerialEntry
-    @AutoGen(category = "pridecapeflags")
-    @TickBox
+//    @AutoGen(category = "pridecapeflags")
+//    @TickBox
     public boolean showPrideCape = true;
 //    @Entry()
     @SerialEntry
-    @AutoGen(category = "pridecapeflags")
-    @StringField
+//    @AutoGen(category = "pridecapeflags")
+//    @StringField
     public String prideCapeFlag = PrideCapeFlags.MOD_ID + ":pride";
 //    @Entry()
     @SerialEntry
-    @AutoGen(category = "pridecapeflags")
-    @MasterTickBox(value = {"elytraPrideCapeFlag"})
+//    @AutoGen(category = "pridecapeflags")
+//    @MasterTickBox(value = {"elytraPrideCapeFlag"})
     public boolean useElytraCape = false;
 //    @Condition(requiredOption = PrideCapeFlags.MOD_ID+":useElytraCape", visibleButLocked = true)
 //    @Entry()
     @SerialEntry
-    @AutoGen(category = "pridecapeflags")
-    @StringField
+//    @AutoGen(category = "pridecapeflags")
+//    @StringField
     public String elytraPrideCapeFlag = PrideCapeFlags.MOD_ID + ":pride";
 
 //    @Override
