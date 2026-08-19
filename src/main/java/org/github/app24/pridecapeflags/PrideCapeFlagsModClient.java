@@ -14,6 +14,7 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import org.github.app24.pridecapeflags.gui.ConfigScreen;
 import org.github.app24.pridecapeflags.network.CapeFlagPacket;
 import org.github.app24.pridecapeflags.network.CapeFlagRequestPacket;
 
@@ -28,7 +29,8 @@ public class PrideCapeFlagsModClient {
     public static final HashMap<String, CapeFlagData> PLAYER_CAPES = Maps.newHashMap();
 
     public PrideCapeFlagsModClient(ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        container.registerExtensionPoint(IConfigScreenFactory.class, (container1, modListScreen) ->
+                new ConfigurationScreen(container1, modListScreen, ConfigScreen::new));
     }
 
     @SubscribeEvent
