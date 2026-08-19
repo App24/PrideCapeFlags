@@ -12,6 +12,7 @@ public class Config {
 
     public static final ModConfigSpec.BooleanValue SHOW_PRIDE_TITLE = BUILDER
             .comment("Show Pride Title during Pride Month")
+            .gameRestart()
             .define("show_pride_title", true);
 
     public static final ModConfigSpec.BooleanValue SHOW_PRIDE_CAPE = BUILDER
@@ -30,7 +31,7 @@ public class Config {
             .comment("Elytra Pride Cap Flag")
             .define("elytra_pride_cape", PrideCapeFlagsMod.MODID+":pride", Config::validateFlagName);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    public static final ModConfigSpec SPEC = BUILDER.build();
 
     private static boolean validateFlagName(final Object obj){
         if(!(obj instanceof String flagName)) return false;
