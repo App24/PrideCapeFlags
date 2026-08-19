@@ -277,6 +277,8 @@ public class PrideCapeFlagsScreen extends Screen {
         renderState.elytraRotX = (float) (Math.PI / 12);
         renderState.elytraRotZ = (float) (-Math.PI / 12);
 
+        renderState.skin = this.minecraft.player.getSkin();
+
         var skinBuilder = new PlayerSkinBuilder(renderState.skin);
 
         if (this.showCape) {
