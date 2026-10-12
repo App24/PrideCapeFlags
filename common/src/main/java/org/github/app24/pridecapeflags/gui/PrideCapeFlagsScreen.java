@@ -53,6 +53,11 @@ public class PrideCapeFlagsScreen extends Screen {
     @Override
     protected void init() {
 
+        if(previousScreen != null) {
+            this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(previousScreen));
+            return;
+        }
+
         if (this.minecraft.player == null) {
             this.minecraft.gui.setScreen(new NotInWorldScreen(this.minecraft, previousScreen));
             return;
@@ -208,8 +213,8 @@ public class PrideCapeFlagsScreen extends Screen {
         if (hasSettingsChanged()) {
             PrideCapeFlagsClient.MOD_CONFIG.setPrideCapeFlag(this.capeFlagBox.getValue());
             PrideCapeFlagsClient.MOD_CONFIG.setElytraCapeFlag(this.elytraFlagBox.getValue());
-            PrideCapeFlagsClient.MOD_CONFIG.setElytraCape(this.useElytraCape);
-            PrideCapeFlagsClient.MOD_CONFIG.setPrideCape(this.showCape);
+            PrideCapeFlagsClient.MOD_CONFIG.setUseElytraCape(this.useElytraCape);
+            PrideCapeFlagsClient.MOD_CONFIG.setShowPrideCape(this.showCape);
             PrideCapeFlagsClient.MOD_CONFIG.saveConfig();
             PrideCapeFlagsClient.MOD_CONFIG.updateConfig();
         }

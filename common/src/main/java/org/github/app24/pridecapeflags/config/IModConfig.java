@@ -6,13 +6,13 @@ public interface IModConfig {
     void setPrideTitle(boolean show);
 
     boolean showPrideCape();
-    void setPrideCape(boolean show);
+    void setShowPrideCape(boolean show);
 
     String getPrideCapeFlag();
     void setPrideCapeFlag(String flag);
 
     boolean useElytraCape();
-    void setElytraCape(boolean use);
+    void setUseElytraCape(boolean use);
 
     String getElytraCapeFlag();
     void setElytraCapeFlag(String flag);

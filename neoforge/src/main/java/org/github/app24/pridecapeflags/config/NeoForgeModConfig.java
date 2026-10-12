@@ -56,7 +56,7 @@ public class NeoForgeModConfig implements IModConfig {
     }
 
     @Override
-    public void setPrideCape(boolean show) {
+    public void setShowPrideCape(boolean show) {
         SHOW_PRIDE_CAPE.set(show);
     }
 
@@ -76,7 +76,7 @@ public class NeoForgeModConfig implements IModConfig {
     }
 
     @Override
-    public void setElytraCape(boolean use) {
+    public void setUseElytraCape(boolean use) {
         USE_ELYTRA_CAPE.set(use);
     }
 

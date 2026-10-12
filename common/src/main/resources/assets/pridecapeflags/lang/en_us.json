@@ -1,8 +1,16 @@
 {
+  "pridecapeflags.menu.settings": "Pride Cape Settings",
+
   "pridecapeflags.menu.config.title": "Pride Capes Config",
   "pridecapeflags.menu.config.prideCapeFlag": "Pride Cape Name",
   "pridecapeflags.menu.config.elytraCapeFlag": "Elytra Pride Cape Name",
 
   "pridecapeflags.not_in_world.title": "Unavailable in Main Menu",
-  "pridecapeflags.not_in_world": "You need to be in a world to edit your pride cape."
+  "pridecapeflags.not_in_world": "You need to be in a world to edit your pride cape.",
+
+  "pridecapeflags.menu.settings.title": "Select a Pride Cape",
+  "pridecapeflags.menu.useElytraCape": "Use Elytra Cape",
+  "pridecapeflags.menu.showCape": "Show Cape",
+
+  "pridecapeflags.flag.lesbian": "Lesbian"
 }

@@ -67,7 +67,7 @@ public class FabricModConfig implements IModConfig{
     }
 
     @Override
-    public void setPrideCape(boolean show) {
+    public void setShowPrideCape(boolean show) {
         INSTANCE().showPrideCape = show;
     }
 
@@ -87,7 +87,7 @@ public class FabricModConfig implements IModConfig{
     }
 
     @Override
-    public void setElytraCape(boolean use) {
+    public void setUseElytraCape(boolean use) {
         INSTANCE().useElytraCape = use;
     }
 
