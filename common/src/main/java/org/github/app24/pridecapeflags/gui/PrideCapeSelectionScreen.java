@@ -34,7 +34,7 @@ public class PrideCapeSelectionScreen extends Screen {
 
     private CapeSelectionWidget currentSelectedCape, currentSelectedElytraCape;
 
-    protected PrideCapeSelectionScreen(Screen lastScreen) {
+    public PrideCapeSelectionScreen(Screen lastScreen) {
         super(Component.translatable("pridecapeflags.menu.selection.title"));
 
         this.lastScreen = lastScreen;
@@ -53,7 +53,6 @@ public class PrideCapeSelectionScreen extends Screen {
         this.addTitle();
         this.addContents();
         this.addFooter();
-//        this.addExtraSettings();
         this.layout.visitWidgets(this::addRenderableWidget);
         this.repositionElements();
     }
@@ -87,29 +86,39 @@ public class PrideCapeSelectionScreen extends Screen {
 
         capeWidgets = new ArrayList<>();
 
-        Minecraft.getInstance().getResourceManager().listResources("flags", v->true).forEach((identifier, resource) -> {
+        Minecraft.getInstance().getResourceManager().listResources("flags", v -> true).forEach((identifier, resource) -> {
             String flagName = identifier.getPath().replace("flags/", "").replace(".png", "");
             Identifier id = Identifier.fromNamespaceAndPath(identifier.getNamespace(), flagName);
-            var capeSelectionWidget = new CapeSelectionWidget(0,0,Component.translatable(identifier.getNamespace()+".flag."+flagName), this.minecraft, id);
-            if(id.toString().equals(PrideCapeFlagsClient.MOD_CONFIG.getPrideCapeFlag()))
+            var capeSelectionWidget = new CapeSelectionWidget(0, 0, Component.translatable(identifier.getNamespace() + ".flag." + flagName), this.minecraft, id);
+            if (id.toString().equals(PrideCapeFlagsClient.MOD_CONFIG.getPrideCapeFlag()))
                 setCurrentSelectedCape(capeSelectionWidget);
-            if(id.toString().equals(PrideCapeFlagsClient.MOD_CONFIG.getElytraCapeFlag()))
+            if (id.toString().equals(PrideCapeFlagsClient.MOD_CONFIG.getElytraCapeFlag()))
                 setCurrentSelectedElytraCape(capeSelectionWidget);
             capeSelectionWidget.setOnCapeClick(widget -> {
                 this.saveButton.active = true;
                 this.setCurrentSelectedCape(widget);
             });
-            capeSelectionWidget.setOnElytraClick(widget->{
+            capeSelectionWidget.setOnElytraClick(widget -> {
                 this.saveButton.active = true;
                 this.setCurrentSelectedElytraCape(widget);
             });
             capeWidgets.add(capeSelectionWidget);
         });
 
-        if(this.currentSelectedCape == null || this.currentSelectedElytraCape == null){
-            var capeSelectionWidget = new CapeSelectionWidget(0,0,Component.translatable(Constants.MOD_ID+".missing_flag"), this.minecraft, Identifier.fromNamespaceAndPath(Constants.MOD_ID, "missing_flag"));
-            setCurrentSelectedCape(capeSelectionWidget);
+        boolean capeTextureLoaded = this.currentSelectedCape != null;
+        boolean elytraTextureLoaded = this.currentSelectedElytraCape != null;
+
+        if (!elytraTextureLoaded) {
+            var capeSelectionWidget = new CapeSelectionWidget(0, 0, Component.translatable(Constants.MOD_ID + ".missing_flag"), this.minecraft, Identifier.tryParse(PrideCapeFlagsClient.MOD_CONFIG.getElytraCapeFlag()));
+            capeSelectionWidget.active = false;
             setCurrentSelectedElytraCape(capeSelectionWidget);
+            capeWidgets.addFirst(capeSelectionWidget);
+        }
+
+        if (!capeTextureLoaded) {
+            var capeSelectionWidget = new CapeSelectionWidget(0, 0, Component.translatable(Constants.MOD_ID + ".missing_flag"), this.minecraft, Identifier.tryParse(PrideCapeFlagsClient.MOD_CONFIG.getPrideCapeFlag()));
+            capeSelectionWidget.active = false;
+            setCurrentSelectedCape(capeSelectionWidget);
             capeWidgets.addFirst(capeSelectionWidget);
         }
 
@@ -129,8 +138,8 @@ public class PrideCapeSelectionScreen extends Screen {
             this.saveButton.active = true;
         });
 
-        widgets.add(useElytraButton);
         widgets.add(showCapeButton);
+        widgets.add(useElytraButton);
 
         this.list.addHeader(widgets);
     }
@@ -178,7 +187,7 @@ public class PrideCapeSelectionScreen extends Screen {
         LinearLayout footer = this.layout.addToFooter(LinearLayout.horizontal().spacing(8));
 
         this.saveButton = footer.addChild(Button.builder(GUI_APPLY, button -> this.saveChanges()).width(200).build());
-        footer.addChild(Button.builder(CommonComponents.GUI_CANCEL, button -> this.onClose()).width(200).build());
+        footer.addChild(Button.builder(CommonComponents.GUI_BACK, button -> this.onClose()).width(200).build());
 
         this.saveButton.active = false;
     }

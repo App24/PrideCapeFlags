@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.github.app24.pridecapeflags.Constants;
 import org.github.app24.pridecapeflags.gui.PrideCapeFlagsScreen;
+import org.github.app24.pridecapeflags.gui.PrideCapeSelectionScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,7 +32,7 @@ public abstract class PauseScreenMixin extends Screen {
     @Inject(method = "createPauseMenu", at = @At("MIXINEXTRAS:EXPRESSION"), order = -1000)
     private void insertPrideCapeFlagsIconButton(CallbackInfo ci, @Local(name = "iconButtonRow") LinearLayout iconButtonRow) {
         SpriteIconButton playerReportingButton = SpriteIconButton.builder(
-                        PRIDE_CAPE_FLAGS, var1x -> this.minecraft.gui.setScreen(new PrideCapeFlagsScreen(this, Minecraft.getInstance().player)), true
+                        PRIDE_CAPE_FLAGS, var1x -> this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this)), true
                 )
                 .width(20)
                 .sprite(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "pause_menu/cape_editor"), 15, 15)

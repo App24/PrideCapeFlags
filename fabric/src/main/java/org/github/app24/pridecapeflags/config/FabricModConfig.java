@@ -57,7 +57,7 @@ public class FabricModConfig implements IModConfig{
     }
 
     @Override
-    public void setPrideTitle(boolean show) {
+    public void setShowPrideTitle(boolean show) {
         INSTANCE().showPrideTitle = show;
     }
 

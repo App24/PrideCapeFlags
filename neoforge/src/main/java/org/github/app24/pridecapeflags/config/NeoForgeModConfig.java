@@ -46,7 +46,7 @@ public class NeoForgeModConfig implements IModConfig {
     }
 
     @Override
-    public void setPrideTitle(boolean show) {
+    public void setShowPrideTitle(boolean show) {
         SHOW_PRIDE_TITLE.set(show);
     }
 

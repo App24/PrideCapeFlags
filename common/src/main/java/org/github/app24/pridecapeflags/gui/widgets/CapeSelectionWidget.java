@@ -24,6 +24,7 @@ import org.joml.Vector3f;
 import java.util.function.Consumer;
 
 public class CapeSelectionWidget extends AbstractWidget {
+    private static final Identifier DISABLED_BACKGROUND = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "widget/disabled_cape_background");
     private static final Identifier BACKGROUND = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "widget/cape_background");
     private static final Identifier CAPE_SELECTED = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "widget/cape_selected");
     private static final Identifier ELYTRA_SELECTED = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "widget/elytra_selected");
@@ -48,7 +49,7 @@ public class CapeSelectionWidget extends AbstractWidget {
     protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int i, int i1, float v) {
         graphics.blitSprite(
                 RenderPipelines.GUI_TEXTURED,
-                BACKGROUND,
+                this.isActive()? BACKGROUND:DISABLED_BACKGROUND,
                 this.getX(),
                 this.getY(),
                 this.getWidth(),
@@ -132,7 +133,6 @@ public class CapeSelectionWidget extends AbstractWidget {
 
     @Override
     protected boolean isValidClickButton(MouseButtonInfo buttonInfo) {
-        if(this.onCapeClick == null || this.onElytraClick == null) return false;
         return buttonInfo.button() == 1 || buttonInfo.button() == 3;
     }
 

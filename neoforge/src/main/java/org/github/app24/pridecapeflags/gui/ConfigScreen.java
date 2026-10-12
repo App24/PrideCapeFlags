@@ -22,22 +22,27 @@ public class ConfigScreen extends ConfigurationScreen.ConfigurationSectionScreen
     }
 
     @Override
-    protected @Nullable Element createBooleanValue(String key, ModConfigSpec.ValueSpec spec, Supplier<Boolean> source, Consumer<Boolean> target) {
-        if(!key.equals(NeoForgeModConfig.SHOW_PRIDE_TITLE.getPath().getFirst()))
-            return null;
-        return super.createBooleanValue(key, spec, source, target);
+    protected void init() {
+        this.minecraft.gui.setScreen(new PrideCapeConfigScreen(this.lastScreen));
     }
 
-    @Override
-    protected @Nullable Element createStringValue(String key, Predicate<String> tester, Supplier<String> source, Consumer<String> target) {
-        return null;
-    }
-
-    @Override
-    protected Collection<? extends Element> createSyntheticValues() {
-        var editCapeButton = new Element(null, null,
-                Button.builder(Component.translatable("pridecapeflags.menu.config.editCape"),
-                        button -> this.minecraft.gui.setScreen(new PrideCapeFlagsScreen(this))).build(), true);
-        return Collections.singletonList(editCapeButton);
-    }
+    //    @Override
+//    protected @Nullable Element createBooleanValue(String key, ModConfigSpec.ValueSpec spec, Supplier<Boolean> source, Consumer<Boolean> target) {
+//        if(!key.equals(NeoForgeModConfig.SHOW_PRIDE_TITLE.getPath().getFirst()))
+//            return null;
+//        return super.createBooleanValue(key, spec, source, target);
+//    }
+//
+//    @Override
+//    protected @Nullable Element createStringValue(String key, Predicate<String> tester, Supplier<String> source, Consumer<String> target) {
+//        return null;
+//    }
+//
+//    @Override
+//    protected Collection<? extends Element> createSyntheticValues() {
+//        var editCapeButton = new Element(null, null,
+//                Button.builder(Component.translatable("pridecapeflags.menu.config.editCape"),
+//                        button -> this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this))).build(), true);
+//        return Collections.singletonList(editCapeButton);
+//    }
 }

@@ -19,7 +19,7 @@ public class ConfigScreen extends YACLScreen {
         var buttonWidth = slice - 50;
 
         AbstractWidget widget = Button.builder(Component.translatable("pridecapeflags.config.editCape"), button ->
-                this.minecraft.gui.setScreen(new PrideCapeFlagsScreen(this))).bounds(12, 0, buttonWidth, 20).build();
+                this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this))).bounds(12, 0, buttonWidth, 20).build();
 
 
         widget.setPosition(15,50);

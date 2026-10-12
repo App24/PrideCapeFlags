@@ -80,7 +80,7 @@ public class PrideCapeList extends ContainerObjectSelectionList<PrideCapeList.En
 
         private final List<AbstractWidget> children;
         private final Screen screen;
-        private static final int X_OFFSET = 160;
+        private static final int X_OFFSET = 112;
 
         public HeaderEntry(List<AbstractWidget> children, Screen screen){
             this.children = children;
@@ -106,7 +106,7 @@ public class PrideCapeList extends ContainerObjectSelectionList<PrideCapeList.En
                 if(optionInstanceWidget == null) continue;
                 optionInstanceWidget.setPosition(x + xOffset, this.getContentY());
                 optionInstanceWidget.extractRenderState(graphics, mouseX, mouseY, a);
-                xOffset += 112;
+                xOffset += X_OFFSET;
             }
         }
     }

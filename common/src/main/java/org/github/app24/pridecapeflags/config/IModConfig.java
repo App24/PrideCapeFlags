@@ -3,7 +3,7 @@ package org.github.app24.pridecapeflags.config;
 public interface IModConfig {
 
     boolean showPrideTitle();
-    void setPrideTitle(boolean show);
+    void setShowPrideTitle(boolean show);
 
     boolean showPrideCape();
     void setShowPrideCape(boolean show);
