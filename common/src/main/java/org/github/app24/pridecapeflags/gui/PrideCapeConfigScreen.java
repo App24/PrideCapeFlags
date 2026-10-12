@@ -42,13 +42,13 @@ public class PrideCapeConfigScreen extends Screen {
     private void addContents() {
         var linear = this.layout.addToContents(LinearLayout.vertical().spacing(8));
 
-        linear.addChild(CycleButton.onOffBuilder(this.showPrideTitle).create(0,0, 150, 20, Component.translatable("pridecapeflags.menu.config.showPrideTitle"), (cycleButton, value) -> {
+        linear.addChild(CycleButton.onOffBuilder(this.showPrideTitle).create(0,0, 250, 20, Component.translatable("pridecapeflags.menu.config.showPrideTitle"), (cycleButton, value) -> {
             this.showPrideTitle = value;
 
             this.saveButton.active = true;
         }));
 
-        linear.addChild(Button.builder(Component.translatable("pridecapeflags.menu.config.openSelection"), button-> this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this))).width(150).build());
+        linear.addChild(Button.builder(Component.translatable("pridecapeflags.menu.config.openSelection"), button-> this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this))).width(250).build());
     }
 
     protected void addFooter() {

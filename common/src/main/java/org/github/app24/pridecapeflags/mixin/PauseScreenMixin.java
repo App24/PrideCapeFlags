@@ -12,7 +12,6 @@ import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.github.app24.pridecapeflags.Constants;
-import org.github.app24.pridecapeflags.gui.PrideCapeFlagsScreen;
 import org.github.app24.pridecapeflags.gui.PrideCapeSelectionScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

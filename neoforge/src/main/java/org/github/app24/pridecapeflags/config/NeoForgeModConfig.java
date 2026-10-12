@@ -11,7 +11,6 @@ public class NeoForgeModConfig implements IModConfig {
 
     public static final ModConfigSpec.BooleanValue SHOW_PRIDE_TITLE = BUILDER
             .comment("Show Pride Title during Pride Month")
-            .gameRestart()
             .define("show_pride_title", true);
 
     public static final ModConfigSpec.BooleanValue SHOW_PRIDE_CAPE = BUILDER
@@ -20,7 +19,7 @@ public class NeoForgeModConfig implements IModConfig {
 
     public static final ModConfigSpec.ConfigValue<String> PRIDE_CAPE_FLAG = BUILDER
             .comment("Pride Cape Flag")
-            .define("pride_cape", Constants.MOD_ID+":pride", NeoForgeModConfig::validateFlagName);
+            .define("pride_cape", Constants.MOD_ID+":pride");
 
     public static final ModConfigSpec.BooleanValue USE_ELYTRA_CAPE = BUILDER
             .comment("Use Elytra Texture")
@@ -28,17 +27,17 @@ public class NeoForgeModConfig implements IModConfig {
 
     public static final ModConfigSpec.ConfigValue<String> ELYTRA_PRIDE_CAPE_FLAG = BUILDER
             .comment("Elytra Pride Cap Flag")
-            .define("elytra_pride_cape", Constants.MOD_ID+":pride", NeoForgeModConfig::validateFlagName);
+            .define("elytra_pride_cape", Constants.MOD_ID+":pride");
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 
-    private static boolean validateFlagName(final Object obj){
-        if(!(obj instanceof String flagName)) return false;
-        var identifier = Identifier.tryParse(flagName);
-        if(identifier == null) return false;
-        if(Minecraft.getInstance() == null || !Minecraft.getInstance().isGameLoadFinished()) return true;
-        return PrideCapeFlagsClient.checkFlagValid(identifier);
-    }
+//    private static boolean validateFlagName(final Object obj){
+//        if(!(obj instanceof String flagName)) return false;
+//        var identifier = Identifier.tryParse(flagName);
+//        if(identifier == null) return false;
+//        if(Minecraft.getInstance() == null || !Minecraft.getInstance().isGameLoadFinished()) return true;
+//        return PrideCapeFlagsClient.checkFlagValid(identifier);
+//    }
 
     @Override
     public boolean showPrideTitle() {
