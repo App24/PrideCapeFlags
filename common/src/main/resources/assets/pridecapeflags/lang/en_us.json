@@ -9,8 +9,11 @@
   "pridecapeflags.menu.useElytraCape": "Use Elytra Cape",
   "pridecapeflags.menu.showCape": "Show Cape",
 
-  "pridecapeflags.menu.config.showPrideTitle": "Show Pride Title",
+  "pridecapeflags.menu.config.showPrideTitle": "Show Pride Title during Pride",
   "pridecapeflags.menu.config.openSelection": "Open Cape Selection",
+
+  "pridecapeflags.menu.selection.leftClick": "Left Click selects Cape",
+  "pridecapeflags.menu.selection.rightClick": "Right Click selects Elytra",
 
   "pridecapeflags.flag.ace": "Ace Flag",
   "pridecapeflags.flag.aro": "Aro Flag",

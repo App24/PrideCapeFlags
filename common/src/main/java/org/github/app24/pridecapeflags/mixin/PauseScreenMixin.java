@@ -34,7 +34,7 @@ public abstract class PauseScreenMixin extends Screen {
                         PRIDE_CAPE_FLAGS, var1x -> this.minecraft.gui.setScreen(new PrideCapeSelectionScreen(this)), true
                 )
                 .width(20)
-                .sprite(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "pause_menu/cape_editor"), 15, 15)
+                .sprite(Identifier.fromNamespaceAndPath(Constants.MOD_ID, "pause_menu/cape_editor"), 16, 16)
                 .withTootip()
                 .build();
         iconButtonRow.addChild(playerReportingButton);

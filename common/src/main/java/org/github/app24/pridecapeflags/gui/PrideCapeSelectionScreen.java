@@ -142,6 +142,9 @@ public class PrideCapeSelectionScreen extends Screen {
         widgets.add(useElytraButton);
 
         this.list.addHeader(widgets);
+
+        this.list.addText(Component.translatable("pridecapeflags.menu.selection.leftClick"), this.font, 9);
+        this.list.addText(Component.translatable("pridecapeflags.menu.selection.rightClick"), this.font, 9);
     }
 
     @Override

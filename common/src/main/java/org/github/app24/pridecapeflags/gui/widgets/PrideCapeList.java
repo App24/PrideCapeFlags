@@ -2,12 +2,15 @@ package org.github.app24.pridecapeflags.gui.widgets;
 
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import org.github.app24.pridecapeflags.gui.PrideCapeSelectionScreen;
 
 import java.util.Collections;
@@ -23,6 +26,13 @@ public class PrideCapeList extends ContainerObjectSelectionList<PrideCapeList.En
 
     public void addHeader(List<AbstractWidget> widgets) {
         this.addEntry(new HeaderEntry(widgets, this.screen), 25);
+    }
+
+    public StringWidget addText(Component message, Font font, int height){
+        int textWidth = font.width(message);
+        StringWidget widget = new StringWidget(0,0,textWidth, height, message, font);
+        this.addEntry(new TextEntry(List.of(widget), this.screen), height+5);
+        return widget;
     }
 
     public void addCapeWidgets(List<CapeSelectionWidget> widgets) {
@@ -107,6 +117,37 @@ public class PrideCapeList extends ContainerObjectSelectionList<PrideCapeList.En
                 optionInstanceWidget.setPosition(x + xOffset, this.getContentY());
                 optionInstanceWidget.extractRenderState(graphics, mouseX, mouseY, a);
                 xOffset += X_OFFSET;
+            }
+        }
+    }
+
+    public static class TextEntry extends PrideCapeList.Entry {
+        private final List<AbstractWidget> children;
+        private final Screen screen;
+
+        public TextEntry(List<AbstractWidget> children, Screen screen) {
+            this.children = children;
+            this.screen = screen;
+        }
+
+        @Override
+        public List<? extends GuiEventListener> children() {
+            return Collections.unmodifiableList(this.children);
+        }
+
+        @Override
+        public List<? extends NarratableEntry> narratables() {
+            return Collections.unmodifiableList(this.children);
+        }
+
+        @Override
+        public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float a) {
+            int x = this.screen.width / 2 - 69 - 32;
+
+            for (AbstractWidget optionInstanceWidget : this.children) {
+                if(optionInstanceWidget == null) continue;
+                optionInstanceWidget.setPosition(x, this.getContentY());
+                optionInstanceWidget.extractRenderState(graphics, mouseX, mouseY, a);
             }
         }
     }
