@@ -87,6 +87,7 @@ public class PrideCapeSelectionScreen extends Screen {
         capeWidgets = new ArrayList<>();
 
         Minecraft.getInstance().getResourceManager().listResources("flags", v -> true).forEach((identifier, resource) -> {
+            if(!identifier.getPath().endsWith(".png")) return;
             String flagName = identifier.getPath().replace("flags/", "").replace(".png", "");
             Identifier id = Identifier.fromNamespaceAndPath(identifier.getNamespace(), flagName);
             var capeSelectionWidget = new CapeSelectionWidget(0, 0, Component.translatable(identifier.getNamespace() + ".flag." + flagName), this.minecraft, id);
